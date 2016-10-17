@@ -2,7 +2,7 @@
 #-*- coding: utf8 -*-
 from Tkinter import *
 #from NMEA_Reader import *
-import time
+import NMEA_Reader
 
 LOGO_IMAGE_ADDRESS = "logo.gif"
 
@@ -11,12 +11,14 @@ Read_Taggle = 0
 # Callback function
 def Reading():
     global Read_Taggle
+    readCycle_ms = int(readCycle.get()) * 1000
     if (Read_Taggle == 1):
-        print "Running"
-        mainWin.after(1000,Reading)           
+        #print "Running"
+        NMEA_Reader.getLocation(serialport.get(),int(baudrate.get()))
+        mainWin.after(readCycle_ms,Reading)           
 
 def Stop_Command():
-    #print "Test! Reading Speed-->" + ReadingSpeed_Entry.get() + ". Serial Port-->" + Serialport_Entry.get() + ". Read Cycle-->" + ReadCycle_Entry.get() + "."
+    #print "Test! Reading Speed-->" + Baudrate_Entry.get() + ". Serial Port-->" + Serialport_Entry.get() + ". Read Cycle-->" + ReadCycle_Entry.get() + "."
     global Read_Taggle
     Read_Taggle = 0
 
@@ -31,7 +33,7 @@ mainWin.title("GPS Reader")
 mainWin.geometry('300x200')
 
 # Variable 
-readingSpeed = StringVar()
+baudrate = StringVar()
 serialport = StringVar()
 readCycle = StringVar()
 
@@ -51,10 +53,10 @@ logo_Label=Label(logo_Frame,image=logo_PhotoImage)
 logo_Label.grid(row=0,column=1,columnspan=3,pady=8)
 
 # Add labels and entries.
-ReadingSpeed_Label=Label(input_Frame,text="Baudrate:")
-ReadingSpeed_Label.grid(row=1,column=0,columnspan=2)
-ReadingSpeed_Entry=Entry(input_Frame,textvariable=readingSpeed)
-ReadingSpeed_Entry.grid(row=1,column=2,columnspan=2)
+Baudrate_Label=Label(input_Frame,text="Baudrate:")
+Baudrate_Label.grid(row=1,column=0,columnspan=2)
+Baudrate_Entry=Entry(input_Frame,textvariable=baudrate)
+Baudrate_Entry.grid(row=1,column=2,columnspan=2)
 
 
 Serialport_Label=Label(input_Frame,text="GPS Serial Port:")
