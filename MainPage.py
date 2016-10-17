@@ -14,7 +14,7 @@ def Reading():
     readCycle_ms = int(readCycle.get()) * 1000
     if (Read_Taggle == 1):
         #print "Running"
-        NMEA_Reader.getLocation(serialport.get(),int(baudrate.get()))
+        print NMEA_Reader.getLocation(serialport.get(),int(baudrate.get()))
         mainWin.after(readCycle_ms,Reading)           
 
 def Stop_Command():

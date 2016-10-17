@@ -3,6 +3,10 @@
 
 import serial
 
+stableSen = "$GPGSA"
+locationSen = "$GPRMC"
+speedSen = "$GPVTG"
+
 def formatLocation(information):
     #read the abs value
     latitude = float(information[3])
@@ -43,3 +47,5 @@ def getLocation(readPort,baudrate):
                     lookingPosition = False
             
             return locationInfo #+ ',' + speedInfo
+        elif information[0] == stableSen and information[2] == '1':
+            return "Signal is not stable."
