@@ -17,5 +17,7 @@ Stop will stop it.
 ----------
 GPS Reader Done.
 Enter baudrate,serial port and read cycle then click start
-it will output the result if signal is stable. 
+it will output the result if signal is stable.
 or print "Signal is not stable."
+
+testsetetst
